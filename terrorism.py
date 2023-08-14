@@ -25,7 +25,7 @@ st.set_page_config( page_title="Omdena  Analysis Of Crime In Nigeria",
 col1, col2 = st.columns((.5, 2))
 
 with col1:
-    logo = Image.open('figures\logo.png')
+    logo = Image.open('figures\\logo.png')
     st.image(logo)
     
 
