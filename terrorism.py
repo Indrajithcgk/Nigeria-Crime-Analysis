@@ -19,7 +19,7 @@ from streamlit_folium import folium_static
 
 
 st.set_page_config( page_title="Omdena  Analysis Of Crime In Nigeria",
-                    page_icon='figures\logo.png',
+                    page_icon='figures\\logo.png',
                     layout='wide')
 
 col1, col2 = st.columns((.5, 2))
