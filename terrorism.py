@@ -142,7 +142,7 @@ elif selected == 'Analysis':
     
 elif selected == 'Map':
     def load_data():
-        df = pd.read_csv("data\\terrorism.csv")
+        df = pd.read_csv("data/terrorism.csv")
 
         return df
 
