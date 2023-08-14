@@ -19,13 +19,13 @@ from streamlit_folium import folium_static
 
 
 st.set_page_config( page_title="Omdena  Analysis Of Crime In Nigeria",
-                    page_icon='figures\\logo.png',
+                    page_icon='figures/logo.png',
                     layout='wide')
 
 col1, col2 = st.columns((.5, 2))
 
 with col1:
-    logo = Image.open('figures\\logo.png')
+    logo = Image.open('figures/logo.png')
     st.image(logo)
     
 
@@ -62,7 +62,7 @@ if selected == 'Home':
 elif selected == 'Analysis':
     #Read dataset
     def load_data():
-        df = pd.read_csv("data\\terrorism.csv")
+        df = pd.read_csv("data/terrorism.csv")
 
         return df
 
