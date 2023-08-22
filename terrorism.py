@@ -34,9 +34,9 @@ with col1:
     
 
 with col2:
-    st.title(':green[Analyzing Crime Incidents in Nigeria]')
-    st.subheader("Local Chapter Enugu, Nigeria Chapter")
-
+    st.title(':green[Predicting Terrorist Attacks and Analyzing Crime Incidents in Nigeria ]')
+    st.subheader("_Impact Hub Enugu, Nigeria Chapter_")
+ 
 
 selected = option_menu(menu_title=None,options=['Home','Analysis','Map','Prediction','Team'], 
 icons=['house-fill','bar-chart-fill','globe-central-south-asia','x-diamond-fill','person-fill'],orientation='horizontal',)
@@ -50,22 +50,43 @@ def load_data():
 df = load_data()
 
 if selected == 'Home':
-    st.header('_The Problem_')
-    st.markdown(""":green[Predicting Terrorist Attacks and Analyzing Crime Incidents in Nigeria Using Machine Learning] :
-                    The problem this project is targeted to solve is to help the security agencies to mitigate the rate of
-                    crime committed in the country by giving the security agencies reasonable insight into the distribution
-                    of crime committed in Nigeria, and also enable them to anticipate possible crime and location of the 
-                    crime, in order to be able to make adequate security checks and take the necessary security measures.
-                    Nigeria is a country with a high level of crime.
-                    The government is working to tackle the crime problem by analyzing the crimes committed 
-                    and building a predictive model to predict future crimes.The goal of the project is to
-                    analyze the crimes committed in Nigeria and build a dashboard to understand crime""")
+    st.write(" ")
+    st.header(':blue[Project background]')
+
+    st.write("""
+                Nigeria has been identified as one of the least peaceful countries in the world, ranking 17th 
+                in terms of crime rates. The first half of 2022 witnessed approximately 6,000 deaths resulting
+                from various factors such as jihadist attacks, kidnappings, banditry, and military actions.
+                The country's security situation necessitates addressing the issue of crime rates, which requires
+                security agencies to have a comprehensive understanding of different types of crimes and the ability
+                to anticipate potential outbreaks. Nigeria can effectively address its security concerns by taking 
+                these measures.
+             
+             """)
+    
+    st.header(':blue[The Problem]')
+
+    st.write("""
+                The primary objective of this project is to provide valuable insights to security agencies 
+                in Nigeria with the aim of reducing the high incidence of crime in the country.By analyzing past 
+                criminal activities and creating a predictive model,the government can anticipate potential
+                crimes and their locations, enabling them to take appropriate security measures.\n
+             
+                :green[The project focus is to analyze crimes committed across Nigeria and
+                Predict the likelihood of an attack occurring on 
+                a specific date and in a particular state.] This will aid the government in addressing the issue of 
+                crime and improving the safety of citizens.
+             
+             """)
+    
+
     
     
-    
+
+    st.write(" ")
     st.markdown(""" For further details click here
-                
-    [GitHub repository]("https://github.com/OmdenaAI/enugu-nigeria-crime-incidents/tree/main")
+                             
+    [Omdena Project Information]("https://omdena.com/chapter-challenges/analysis-and-prediction-of-crime-in-nigeria/")
 """)
 
 
@@ -76,8 +97,10 @@ elif selected == 'Analysis':
     # Convert df['date'] to datetime datatype
     df['date'] = df['date'].astype('datetime64[ns]')
 
+
+
     #1
-    st.title(":red[Crime Analysis]")
+    st.title(":blue[Crime Analysis]")
     # Extract year from the 'date' column
     df['year'] = df['date'].dt.year
     attacks_per_year = df.groupby('year').size().reset_index(name='count')
@@ -93,18 +116,18 @@ elif selected == 'Analysis':
     attacks_per_month = attacks_per_month.sort_values(by='count',ascending=True)
 
 
-    col3, col4 = st.columns((1, 1.2))
+    col3, col4 = st.columns((1.2,1.1))
 
     with col3:
-        st.subheader("Number of Attacks changes over Years")
+        st.subheader(":green[Number of Attacks changes over Years]")
         fig1 = px.line(attacks_per_year, x='year', y='count', markers=True,
         labels={'year': 'Year', 'count': 'Number of Attacks'})
         st.plotly_chart(fig1,use_container_width=True)
 
     with col4:
-        st.subheader("Number of Attacks changes over Months")
+        st.subheader(":green[Number of Attacks changes over Months]")
         fig2 = px.bar(attacks_per_month, x='month', y='count', color='count',width = 400,
-                labels={'month': 'Month', 'count': 'Number of Attacks'}, color_continuous_scale='viridis')
+                labels={'month': 'Month', 'count': 'Number of Attacks'}, color_continuous_scale='Reds')
         st.plotly_chart(fig2,use_container_width=True)
 
     #3
@@ -116,28 +139,33 @@ elif selected == 'Analysis':
 
 
     col5,col6 = st.columns((1,1))
+    custom_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
 
     with col5:
-        st.subheader("Distribution of Attack Type")
+        
+        st.subheader(":green[Distribution of Attack Type]")
         fig3 = px.pie(attack_type_counts, values=attack_type_counts.values[:6], names =attack_type_counts.index[:6],
                 template="plotly_dark")
         fig3.update_traces(text  = attack_type_counts.index[:6],textposition = "inside")
         st.plotly_chart(fig3, use_container_width=True)
 
     with col6:
-        st.subheader("Distribution of Weapon Type")
+        st.subheader(":green[Distribution of Weapon Type]")
         fig4 = px.pie(weapon_type_counts, values=weapon_type_counts.values, names =weapon_type_counts.index,
                 template="plotly_dark",hole=0.2)
         fig4.update_traces(text  = weapon_type_counts.index,textposition = "inside")
         st.plotly_chart(fig4, use_container_width=True)
         
 
+
+
+
     #5
     #casualties trend
-    st.subheader("Trend of Casualties (Killed and Wounded) Over Time")
+    st.subheader(":green[Trend of Casualties (Killed and Wounded) Over Time]")
     casualties = df.groupby('year')[['no_killed', 'no_wounded']].sum().reset_index()
     fig5 = px.line(casualties, x='year', y=['no_killed', 'no_wounded'],
-                labels={'year': 'Year', 'value': 'Number of Casualties'})
+                labels={'year': 'Year', 'value': 'Number of Casualties'},color_discrete_sequence=custom_colors)
     st.plotly_chart(fig5,use_container_width=True)
             
 
@@ -153,8 +181,12 @@ elif selected == 'Map':
 
     df = load_data()
 
+
+
     def create_folium_map(data, n):
-        city_crime_data = data[['city', 'latitude', 'longitude']].dropna()
+        #remove Unknown state column from the data
+        data = data[data['state'] != 'Unknown']
+        city_crime_data = data[['year','city', 'latitude', 'longitude']].dropna()
 
         # Create a  map centered on Nigeria
         map_nigeria = folium.Map(location=[9.0820, 8.6753], zoom_start=6)
@@ -182,20 +214,23 @@ elif selected == 'Map':
 
     
     def main():
-        st.subheader(':red[" Top N Cities with the highest crime density"]')
-        st.write("The density or heat of crimes happening in each city using")
+        st.subheader(':blue[Top N Cities with the highest crime density]')
+        st.write(":green[The density or heat of crimes happening in each city using]")
 
         # Create a slider 
-        n = st.slider("Select Top N Cities:", min_value=1, max_value=100, value=5)
+        n = st.slider(":red[Select Top N Cities:]", min_value=1, max_value=100, value=5)
 
         # Create and display the Folium map with HeatMap for density of crimes and custom markers for top N cities
-        st.header(f'Top {n} Cities with the Highest Crime Density')
+        st.header(f'_Top {n} Cities with the Highest Crime Density_')
         folium_map = create_folium_map(df, n)
         folium_static(folium_map) 
 
     if __name__ == '__main__':
         main()
-      
+
+
+
+
 elif selected == 'Prediction':
     #Load the holidays for Nigeria
     nigeria_holidays = holidays.Nigeria() 
@@ -239,21 +274,28 @@ elif selected == 'Prediction':
         return pred_prob
 
     
-    st.title(":red[Probability Of Attack Prediction]")
-    st.write('Enter the State and Date to predict the probability of an attack]')
+    st.title(":blue[Probability Of Attack Prediction]")
+    st.write('_Enter the State and Date to predict the probability of an attack_')
 
     state = st.selectbox(':green[Select State:]', socio_demo_data['State'].unique())
     date_to_check = st.date_input(':green[Select Date:]')
+    st.write(" ")
     prediction_button = st.button('Predict Probability')
 
     if prediction_button:
         prediction = predict_attack_prob(state, date_to_check.strftime('%Y-%m-%d'))
-        st.write(f'Probability of an attack in {state} on {date_to_check.strftime("%Y-%m-%d")}: {prediction}%')
-
-      
-
-
-
+        prediction_color = 'red' if prediction > 40 else 'green' 
+        date_state_color = "green"
+        #st.write(f'Probability of an attack in :{date_state_color}[**{state}**] on :{date_state_color}[**{date_to_check.strftime("%Y-%m-%d")}**] = :{prediction_color}[**{prediction}**%]')
+        prediction_size = "24px"  # Change the size as desired
+        sentence_size = "28px"  # Change the size for the sentence
+        st.markdown(
+        f'<span style="font-size:{sentence_size};">Probability of an attack in </span>'
+        f'<span style="color:{date_state_color}; font-size:{prediction_size};">{state}</span> on '
+        f'<span style="color:{date_state_color}; font-size:{prediction_size};">{date_to_check.strftime("%Y-%m-%d")}</span> = '
+        f'<span style="color:{prediction_color}; font-size:{prediction_size};">{prediction}%</span>',
+        unsafe_allow_html=True
+        )
 
 
 
@@ -287,6 +329,8 @@ elif selected == "Team":
 
     """
         )
+
+
 
 
 
