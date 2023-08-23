@@ -322,9 +322,11 @@ elif selected == "Team":
         * [Indrajith C](https://www.linkedin.com/in/indrajith-c/)
         * [Melat Kebede ](https://www.linkedin.com/in/melat-kebede-291309203)
         * [Miho Rosenberg](http://www.linkedin.com/in/miho-r-93a00321a)
+        * [Milind Shende](https://www.linkedin.com/in/milind-shende/)
         * [Oluchukwu Chiamaka Okorie](https://www.linkedin.com/mwlite/in/oluchukwu-okorie-1872ba17a)
         * [Oni Samson Abidemi](https://www.linkedin.com/in/samson-oni-9bb1b7139/)
         * [Umesh Patil](https://www.linkedin.com/in/patil-umesh/)
+        
 
 
     """
