@@ -23,13 +23,13 @@ import xgboost as xgb
 import joblib
 
 st.set_page_config( page_title="Omdena  Analysis Of Crime In Nigeria",
-                    page_icon='figures/logo.png',
+                    page_icon='figures/Omdena Enugu Nigeria Logo.png',
                     layout='wide')
 
 col1, col2 = st.columns((.5, 2))
 
 with col1:
-    logo = Image.open('figures/logo.png')
+    logo = Image.open('figures/background.jpeg')
     st.image(logo)
     
 
@@ -49,7 +49,11 @@ def load_data():
 
 df = load_data()
 
+
+
 if selected == 'Home':
+
+
     st.write(" ")
     st.header(':blue[Project background]')
 
@@ -130,37 +134,107 @@ elif selected == 'Analysis':
                 labels={'month': 'Month', 'count': 'Number of Attacks'}, color_continuous_scale='Reds')
         st.plotly_chart(fig2,use_container_width=True)
 
+
     #3
-    #distribution of attack types
-    attack_type_counts = df['attack_type'].value_counts()
-    #4
-    #common weapon type
-    weapon_type_counts = df['weapon_type'].value_counts()
-
-
-    col5,col6 = st.columns((1,1))
-    custom_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
+    col5, col6 = st.columns((1,1))
 
     with col5:
-        
-        st.subheader(":green[Distribution of Attack Type]")
-        fig3 = px.pie(attack_type_counts, values=attack_type_counts.values[:6], names =attack_type_counts.index[:6],
-                template="plotly_dark")
-        fig3.update_traces(text  = attack_type_counts.index[:6],textposition = "inside")
-        st.plotly_chart(fig3, use_container_width=True)
+        st.subheader(':green[Top 10 Cities/States having Highest Attacks]')
 
-    with col6:
-        st.subheader(":green[Distribution of Weapon Type]")
-        fig4 = px.pie(weapon_type_counts, values=weapon_type_counts.values, names =weapon_type_counts.index,
-                template="plotly_dark",hole=0.2)
-        fig4.update_traces(text  = weapon_type_counts.index,textposition = "inside")
-        st.plotly_chart(fig4, use_container_width=True)
+        # Add a filter for selecting a city or state
+        location_type = st.radio("Select Location Type:", ['City', 'State'])
         
+
+        if location_type == 'City':
+            location_column = 'city'
+            location_label = 'City'
+        else:
+            location_column = 'state'
+            location_label = 'State'
+
+        df[location_column] = df[location_column].replace('Unknown', df[location_column].mode().iloc[0])
+
+        # Group data by location and count attacks
+        location_attack_counts = df.groupby(location_column).size().reset_index(name='Attack Count')
+
+        # Get the top 10 locations by attack count
+        top_10_locations = location_attack_counts.nlargest(10, 'Attack Count')
+
+        # Create a bar chart using Plotly for the top 10 locations
+        fig3 = px.bar(top_10_locations, x=location_column, y='Attack Count',color='Attack Count',
+                      color_continuous_scale="OrRd")
+        st.plotly_chart(fig3)
+    #4
+    with col6:
+        st.subheader(':green[Top 6 States - Suicide Attacks Distribution]')
+
+        # Filter data to include only suicide attacks
+        suicide_data = df[df['suicide'] == 1]
+
+        # Group data by state and count suicide attacks
+        suicide_state_counts = suicide_data.groupby('state').size().reset_index(name='suicide_count')
+
+        # Get the top 7 states by suicide attack count
+        top_6_suicide_states = suicide_state_counts.nlargest(6, 'suicide_count')
+
+        # Create a pie chart using Plotly for top 5 states' suicide attacks distribution
+        fig4 = px.pie(top_6_suicide_states, values='suicide_count', names='state',template="plotly_dark")
+        fig4.update_traces(textposition='inside')
+
+        # Customize the legend
+        fig4.update_layout(legend=dict(orientation="h", x=.01, y=1.2))
+        fig4.update_layout(
+        margin=dict(l=90, r=20, t=30, b=0),  # Adjust margins for position
+        width=440, height=500,  # Set the width and height of the chart
+        )
+        st.plotly_chart(fig4)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     #5
+    #distribution of attack types
+    attack_type_counts = df['attack_type'].value_counts()
+    #6
+    #common weapon type
+    weapon_type_counts = df['weapon_type'].value_counts()
+
+
+    col7,col8 = st.columns((1,1))
+
+    custom_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
+
+    with col7:
+        
+        st.subheader(":green[Distribution of Attack Type]")
+        fig5 = px.pie(attack_type_counts, values=attack_type_counts.values[:6], names =attack_type_counts.index[:6],
+                template="plotly_dark")
+        fig5.update_traces(text  = attack_type_counts.index[:6],textposition = "inside")
+        st.plotly_chart(fig5, use_container_width=True)
+
+    with col8:
+        st.subheader(":green[Distribution of Weapon Type]")
+        fig6 = px.pie(weapon_type_counts, values=weapon_type_counts.values, names =weapon_type_counts.index,
+                template="plotly_dark",hole=0.2)
+        fig6.update_traces(text  = weapon_type_counts.index,textposition = "inside")
+        st.plotly_chart(fig6, use_container_width=True)
+        
+
+
+
+
+    #7
     #casualties trend
     st.subheader(":green[Trend of Casualties (Killed and Wounded) Over Time]")
     casualties = df.groupby('year')[['no_killed', 'no_wounded']].sum().reset_index()
