@@ -29,13 +29,13 @@ st.set_page_config( page_title="Omdena  Analysis Of Crime In Nigeria",
 col1, col2 = st.columns((.5, 2))
 
 with col1:
-    logo = Image.open('figures/background.jpeg')
+    logo = Image.open('figures/Omdena Enugu Nigeria Logo.png')
     st.image(logo)
     
 
 with col2:
     st.title(':green[Predicting Terrorist Attacks and Analyzing Crime Incidents in Nigeria ]')
-    st.subheader("_Impact Hub Enugu, Nigeria Chapter_")
+    st.subheader("_Omdena, Enugu Nigeria Chapter, Nigeria Chapter_")
  
 
 selected = option_menu(menu_title=None,options=['Home','Analysis','Map','Prediction','Team'], 
