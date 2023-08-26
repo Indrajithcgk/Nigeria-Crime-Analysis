@@ -371,6 +371,8 @@ elif selected == 'Prediction':
         unsafe_allow_html=True
         )
 
+        
+
 
 
 elif selected == "Team":
@@ -392,14 +394,19 @@ elif selected == "Team":
         * [Abomaye Victor](https://www.linkedin.com/in/abomaye-eniatorudabo-a40175107)
         * [Alamin Musa Magaga](https://www.linkedin.com/in/alamin-magaga-8b388118b/)
         * [Anjali Dashora](https://www.linkedin.com/in/anjali-dashora-4a232b204)
+        * [Barakat Akinsiku](https://www.linkedin.com/in/)
+        * [Danish Mehmood](https://www.linkedin.com/in/danish2014/)
         * [Devyash Jain](https://www.linkedin.com/in/devyash-jain-4abb2322a/)
+        * [Ibrahim Ahmad Ismail](https://www.linkedin.com/in/ahmad-ibrahim-ismail-238a21138/)
         * [Indrajith C](https://www.linkedin.com/in/indrajith-c/)
+        * [Marwan Ashraf](https://www.linkedin.com/in/marwan-ashraf-b02538195/)
         * [Melat Kebede ](https://www.linkedin.com/in/melat-kebede-291309203)
         * [Miho Rosenberg](http://www.linkedin.com/in/miho-r-93a00321a)
         * [Milind Shende](https://www.linkedin.com/in/milind-shende/)
         * [Oluchukwu Chiamaka Okorie](https://www.linkedin.com/mwlite/in/oluchukwu-okorie-1872ba17a)
         * [Oni Samson Abidemi](https://www.linkedin.com/in/samson-oni-9bb1b7139/)
         * [Robson Serafim](https://www.linkedin.com/in/robson-castro-serafim/)
+        * [Rukshar Alam](https://www.linkedin.com/in/ruksharalam/)
         * [Umesh Patil](https://www.linkedin.com/in/patil-umesh/)
         
         
