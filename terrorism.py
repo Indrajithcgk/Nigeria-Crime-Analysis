@@ -394,7 +394,7 @@ elif selected == "Team":
         * [Abomaye Victor](https://www.linkedin.com/in/abomaye-eniatorudabo-a40175107)
         * [Alamin Musa Magaga](https://www.linkedin.com/in/alamin-magaga-8b388118b/)
         * [Anjali Dashora](https://www.linkedin.com/in/anjali-dashora-4a232b204)
-        * [Barakat Akinsiku](https://www.linkedin.com/in/)
+        * [Barakat Akinsiku](https://www.linkedin.com/in/barakat-akinsiku-458430a7)
         * [Danish Mehmood](https://www.linkedin.com/in/danish2014/)
         * [Devyash Jain](https://www.linkedin.com/in/devyash-jain-4abb2322a/)
         * [Ibrahim Ahmad Ismail](https://www.linkedin.com/in/ahmad-ibrahim-ismail-238a21138/)
